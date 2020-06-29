@@ -11,7 +11,7 @@
 
 BOT_NAME = 'analytics'
 
-SPIDER_MODULES = ['analytics.spiders']
+SPIDER_MODULES = ['analytics.spiders', 'analytics.spiders.jobs']
 NEWSPIDER_MODULE = 'analytics.spiders'
 
 
