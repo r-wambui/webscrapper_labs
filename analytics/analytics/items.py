@@ -12,3 +12,10 @@ class AnalyticsItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
+
+
+class Jobs(scrapy.Item):
+    title = scrapy.Field()
+    company = scrapy.Field()
+    location = scrapy.Field()
+    time_posted = scrapy.Field()

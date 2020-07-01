@@ -19,7 +19,7 @@ NEWSPIDER_MODULE = 'analytics.spiders'
 #USER_AGENT = 'analytics (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -52,9 +52,9 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
+# DOWNLOADER_MIDDLEWARES = {
 #    'analytics.middlewares.AnalyticsDownloaderMiddleware': 543,
-#}
+# }
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -64,9 +64,10 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'analytics.pipelines.AnalyticsPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'analytics.pipelines.MongoPipeline': 300,
+   'analytics.pipelines.AnalyticsPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +89,14 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+#database
+MONGO_URI = 'mongodb://127.0.0.1/analytics_db'
+MONGO_DATABASE = "analytics_db"
+MONGODB_SERVER = "localhost"
+MONGODB_PORT = 27017
+MONGODB_COLLECTION = "jobs"
+
+
+# set
+DOWNLOAD_DELAY = 5
