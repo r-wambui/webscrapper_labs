@@ -39,4 +39,3 @@ class BrighterMonday(scrapy.Spider):
             item['location'] = job.xpath(".//div[@class='search-result__location']/text()").extract()[0]
             item["time_posted"] = job.xpath("//div[@class='if-wrapper-column align-self--end text--right']/text()").extract()[0]
             yield item
-        yield item

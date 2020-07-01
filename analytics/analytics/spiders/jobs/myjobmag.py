@@ -21,5 +21,10 @@ class Myjobmag(scrapy.Spider):
             job_title = job.xpath(".//li[@class='job-info']//li[@class='mag-b']/h2/a/text()").extract()
             if job_title:
                 item["job_title"] = job_title[0]
-            print(item)
+            company = None  # text analysis from the title
+            loaction = job.xpath(".//li[@class='job-info']//li[@class='job-desc']/text()").extract()
+
+
+            print(loaction)
       
+# time out 

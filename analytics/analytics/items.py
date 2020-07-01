@@ -8,14 +8,18 @@
 import scrapy
 
 
-class AnalyticsItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
-
-
 class Jobs(scrapy.Item):
     title = scrapy.Field()
     company = scrapy.Field()
     location = scrapy.Field()
     time_posted = scrapy.Field()
+
+
+class Tenders(scrapy.Item):
+    tender_code = scrapy.Field()
+    tender_type = scrapy.Field()
+    org_name = scrapy.Field()
+    tender_title = scrapy.Field()
+    tender_reference_no = scrapy.Field()
+    publication_date = scrapy.Field()
+    closing_date = scrapy.Field()
