@@ -6,6 +6,7 @@ class Myjobmag(scrapy.Spider):
     """ Scrape tenders data from the government web portal """
 
     name = "tenders"
+    collection_name = "tenders"
 
     def start_requests(self):
         """ Fetching data from API """
@@ -36,9 +37,9 @@ class Myjobmag(scrapy.Spider):
             'start=0&length=300&search%5Bvalue%5D&search%5Bregex%5D=false&_=1593598282595&input'
         
         # work on the pagination
-        yield scrapy.Request(url=url, callback=self.get_jobs)
+        yield scrapy.Request(url=url, callback=self.get_tenders)
     
-    def get_jobs(self, response):
+    def get_tenders(self, response):
         item = {}
         response_data = json.loads(response.body)['data']
         for row in response_data:
@@ -49,4 +50,4 @@ class Myjobmag(scrapy.Spider):
             item['tender_reference_no'] = row['tender_ref_no']
             item['publication_date'] = row['publication_date']
             item['closing_date'] = row['closing_date']
-           yield item
+            yield item

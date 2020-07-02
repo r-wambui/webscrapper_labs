@@ -12,7 +12,7 @@
 BOT_NAME = 'analytics'
 
 SPIDER_MODULES = ['analytics.spiders', 'analytics.spiders.jobs',
-               'analytics.spiders.tenders']
+               'analytics.spiders.tenders', 'analytics.spiders.stock_exchange']
 NEWSPIDER_MODULE = 'analytics.spiders'
 
 
@@ -96,7 +96,6 @@ MONGO_URI = 'mongodb://127.0.0.1/analytics_db'
 MONGO_DATABASE = "analytics_db"
 MONGODB_SERVER = "localhost"
 MONGODB_PORT = 27017
-MONGODB_COLLECTION = "jobs"
 
 
 # set

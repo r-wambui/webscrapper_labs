@@ -3,6 +3,7 @@ import scrapy
 
 class BrighterMonday(scrapy.Spider):
     name = "jobs"
+    collection_name = "jobs"
 
     custom_settings = {
         'DUPEFILTER_CLASS': 'scrapy.dupefilters.BaseDupeFilter',

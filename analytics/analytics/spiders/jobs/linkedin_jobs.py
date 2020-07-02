@@ -4,6 +4,7 @@ import scrapy
 class LinkedinJobs(scrapy.Spider):
 
     name = "linkedin"
+    collection_name = "jobs"
 
     def start_requests(self):
         url = 'https://www.linkedin.com/jobs/search?location=Nairobi%2C%'\
