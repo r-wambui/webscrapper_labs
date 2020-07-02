@@ -3,13 +3,14 @@ import scrapy
 
 class BrighterMonday(scrapy.Spider):
     name = "jobs"
+    collection_name = "jobs"
 
     custom_settings = {
         'DUPEFILTER_CLASS': 'scrapy.dupefilters.BaseDupeFilter',
     }
 
     def start_requests(self):
-        urls =[
+        urls = [
             'https://www.brightermonday.co.ke/jobs/software-data',
             'https://www.brightermonday.co.ke/jobs/engineering-technology'
 
@@ -18,7 +19,7 @@ class BrighterMonday(scrapy.Spider):
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse_pages)
 
-    def parse_pages(self, response): 
+    def parse_pages(self, response):
         url = response.url
         page_urls = [url]
         total_pages = int(response.xpath("//li[@class='page-item'][position()=\
@@ -28,19 +29,14 @@ class BrighterMonday(scrapy.Spider):
             page_urls.append(page_url)
         for url in page_urls:
             yield scrapy.Request(url=url, callback=self.parse)
-        
+
     def parse(self, response):
-
-        Job_listing = response.xpath("//div[@class='search-main__content']")
-        Job_titles = Job_listing.xpath("//header[@class='search-result__header']\
-                                            //h3/text()").getall()
-        Company = Job_listing.xpath("//header[@class='search-result__header']\
-                                    //a[contains(@href, '/jobs?')]/text()").getall()
-        Location = Job_listing.xpath("//header[@class='search-result__header']\
-                                    //div[@class='search-result__location']/text()").getall()
-        Date_posted = Job_listing.xpath("//header[@class='search-result__header']\
-                                        //div[@class='if-wrapper-column align-self--end text--right']/text()").getall()
-           
-
-        
-    
+        item = {}
+        Job_listing = response.xpath("//div[@class='search-main__content']/*\
+                                /header[@class='search-result__header']")
+        for job in Job_listing:
+            item['job_title'] = job.xpath(".//h3/text()").extract()[0]
+            item["company"] = job.xpath(".//a[contains(@href, '/jobs?')]/text()").extract()
+            item['location'] = job.xpath(".//div[@class='search-result__location']/text()").extract()[0]
+            item["time_posted"] = job.xpath("//div[@class='if-wrapper-column align-self--end text--right']/text()").extract()[0]
+            yield item
