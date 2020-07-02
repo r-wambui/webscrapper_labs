@@ -23,3 +23,17 @@ class Tenders(scrapy.Item):
     tender_reference_no = scrapy.Field()
     publication_date = scrapy.Field()
     closing_date = scrapy.Field()
+
+
+class StockExchange(scrapy.Item):
+    company = scrapy.Field()
+    price = scrapy.Field()
+    ltp = scrapy.Field()
+    prev_price = scrapy.Field()
+    today_open = scrapy.Field()
+    today_high = scrapy.Field()
+    today_low = scrapy.Field()
+    turnover = scrapy.Field()
+    volume = scrapy.Field()
+    change = scrapy.Field()
+    today_close = scrapy.Field()
