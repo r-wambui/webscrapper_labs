@@ -4,12 +4,12 @@
 #
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/items.html
-
+# pylint: disable=import-error
 import scrapy
 
 
 class Jobs(scrapy.Item):
-    title = scrapy.Field()
+    job_title = scrapy.Field()
     company = scrapy.Field()
     location = scrapy.Field()
     time_posted = scrapy.Field()
