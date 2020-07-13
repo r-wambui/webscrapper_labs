@@ -19,16 +19,14 @@ class MongoPipeline:
 
     collection_name = 'jobs'
 
-    def __init__(self, mongo_uri, mongo_host, mongo_db):
+    def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri
-        self.mongo_host = mongo_host
         self.mongo_db = mongo_db
 
     @classmethod
     def from_crawler(cls, crawler):
         return cls(
             mongo_uri=crawler.settings.get('MONGO_URI'),
-            mongo_host=crawler.settings.get('MONGO_ HOST'),
             mongo_db=crawler.settings.get('MONGO_DATABASE')
         )
 
