@@ -6,9 +6,9 @@ import json
 from bson import json_util
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/analytics_db"
+app.config["MONGO_URI"] = "mongodb+srv://analytics:nevermind@cluster0.ngveb.mongodb.net/analytics_db?retryWrites=true&w=majority"
 mongo = PyMongo(app)
-
+print(mongo.db)
 
 @app.route('/jobs', methods=["GET"])
 def get_jobs():
@@ -84,4 +84,4 @@ def search_tender(title):
         return {"error": "No such jobs available"}, 404
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=os.environ.get("PORT", 5000))
+    app.run(debug=True, host='0.0.0.0', port=os.environ.get("PORT", 000))
