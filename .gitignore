@@ -3,3 +3,4 @@
 *.json
 UI
 .DS_Store
+.env
