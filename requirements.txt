@@ -30,7 +30,7 @@ PyHamcrest==2.0.2
 pylint==2.5.3
 pymongo==3.10.1
 pyOpenSSL==19.1.0
-Python=3.7.7
+Python==3.7.7
 python-crontab==2.5.1
 python-dateutil==2.8.1
 queuelib==1.5.0
