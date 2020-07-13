@@ -4,7 +4,7 @@
 #
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-
+# pylint: disable=import-error
 from scrapy import signals
 
 

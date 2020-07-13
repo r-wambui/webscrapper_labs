@@ -1,6 +1,7 @@
+# pylint: disable=import-error
 import json
 import scrapy
-
+import re
 
 class Myjobmag(scrapy.Spider):
     """ Scrape tenders data from the government web portal """
@@ -47,7 +48,8 @@ class Myjobmag(scrapy.Spider):
             item['tender_type'] = row['tender_type']
             item['org_name'] = row['org_name']
             item['tender_title'] = row['tender_title']
-            item['tender_reference_no'] = row['tender_ref_no']
+            item['tender_reference_no'] = (re.findall(r'(?<=<a href=")[^"]*',row['tender_ref_no']))[0]
             item['publication_date'] = row['publication_date']
             item['closing_date'] = row['closing_date']
+            print("------------>", item['tender_reference_no'])
             yield item
