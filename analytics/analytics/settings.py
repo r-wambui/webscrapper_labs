@@ -92,7 +92,8 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 #database
-MONGO_URI = 'mongodb://127.0.0.1/analytics_db'
+# MONGO_URI = 'mongodb://127.0.0.1/analytics_db'
+MONGO_URI = "mongodb+srv://rose:<michael1992>@cluster0.ngveb.mongodb.net/<analytics_db>"
 MONGO_HOST = 'mongodb+srv://<URL>'
 MONGO_DATABASE = "analytics_db"
 MONGODB_SERVER = "localhost"
