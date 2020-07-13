@@ -93,6 +93,7 @@ ITEM_PIPELINES = {
 
 #database
 MONGO_URI = 'mongodb://127.0.0.1/analytics_db'
+MONGO_HOST = 'mongodb+srv://<URL>'
 MONGO_DATABASE = "analytics_db"
 MONGODB_SERVER = "localhost"
 MONGODB_PORT = 27017

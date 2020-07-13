@@ -51,5 +51,4 @@ class Myjobmag(scrapy.Spider):
             item['tender_reference_no'] = (re.findall(r'(?<=<a href=")[^"]*',row['tender_ref_no']))[0]
             item['publication_date'] = row['publication_date']
             item['closing_date'] = row['closing_date']
-            print("------------>", item['tender_reference_no'])
             yield item
