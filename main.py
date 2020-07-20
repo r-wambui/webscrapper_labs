@@ -81,7 +81,7 @@ def search_tender(title):
             })
         return json.dumps(results, default=str), 200
     else:
-        return {"error": "No such jobs available"}, 404
+        return {"error": "No such tenders available"}, 404
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=os.environ.get("PORT", 000))
+    app.run(debug=True, host='0.0.0.0', port=os.environ.get("PORT", 8000))

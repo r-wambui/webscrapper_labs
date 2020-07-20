@@ -66,10 +66,16 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'analytics.pipelines.MongoPipeline': 300,
-   'analytics.pipelines.AnalyticsPipeline': 300,
+   
+   # 'analytics.pipelines.AnalyticsPipeline': 500,
+   'analytics.pipelines.MongoPipeline': 500,
 }
 
+SPIDER_MIDDLEWARES = {
+    'scrapy_deltafetch.DeltaFetch': 100,
+}
+
+# DELTAFETCH_ENABLED = True
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
@@ -91,6 +97,8 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
+# LOG_LEVEL = 'INFO'
+# LOG_STDOUT = True
 #database
 # MONGO_URI = 'mongodb://127.0.0.1/analytics_db'
 MONGO_URI = "mongodb+srv://analytics:nevermind@cluster0.ngveb.mongodb.net/<analytics_db>"
