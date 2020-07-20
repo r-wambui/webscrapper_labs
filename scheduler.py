@@ -16,6 +16,6 @@ def scheduled_job():
     mongo_db = client[db]
     mongo_db["jobs"].remove()
     subprocess.call('./scrape.sh', shell=True)
-
+    print("Finished daily run")
     
 sched.start()
