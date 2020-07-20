@@ -29,6 +29,7 @@ class BrighterMonday(scrapy.Spider):
             page_url = url + "?page=" + str(page)
             page_urls.append(page_url)
         for url in page_urls:
+            
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
@@ -37,7 +38,15 @@ class BrighterMonday(scrapy.Spider):
                                 /header[@class='search-result__header']")
         for job in Job_listing:
             item['job_title'] = job.xpath(".//h3/text()").extract()[0]
-            item["company"] = job.xpath(".//a[contains(@href, '/jobs?')]/text()").extract()
+            path_v1 = job.xpath(".//a[contains(@href, '/company')]/text()").extract()
+            path_v2 = job.xpath(".//a[contains(@href, '/jobs?')]/text()").extract()
+            
+            if path_v1:
+                item['company']= path_v1[0]
+            elif path_v2:   
+                item['company'] = path_v2[0]
+            else:
+                item['company'] = 'Brighter Monday'
             item['location'] = job.xpath(".//div[@class='search-result__location']/text()").extract()[0]
             item["time_posted"] = job.xpath("//div[@class='if-wrapper-column align-self--end text--right']/text()").extract()[0]
             yield item
