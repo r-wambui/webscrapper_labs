@@ -1,7 +1,7 @@
-source `which virtualenvwrapper.sh`
-workon env
+#  source `which virtualenvwrapper.sh`
+# workonenv
 
-cd ~/Desktop/Rose/webscrapper_labs/analytics/analytics
+cd analytics
 
 scrapy crawl jobs
 scrapy crawl linkedin
