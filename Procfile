@@ -1,2 +1,2 @@
 web: python main.py
-schedule: python scheduler.py
+clock: python scheduler.pygs
