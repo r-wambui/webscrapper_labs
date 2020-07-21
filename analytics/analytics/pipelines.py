@@ -43,6 +43,7 @@ class MongoPipeline:
 
     def process_item(self, item, spider):
         if spider.name == 'tenders':
+            self.db[self.collection_name].createIndex({item["tender_title"]: "text"})
             if [item for item in self.db[self.collection_name].find( {"tender_code":item['tender_code']} ).limit(1)]:
                 print("data already exist")
 
