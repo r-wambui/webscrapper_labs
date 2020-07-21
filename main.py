@@ -86,10 +86,11 @@ def search_tender(title):
 @app.route('/stock', methods=["GET"])
 def get_stock_prices():
     stock_query = mongo.db.stock_exchange.find()
+    print(stock_query)
     stock_prices = []
     if stock_query.count() is not 0:
         for stock in stock_query:
-            stock_query.append({
+            stock_prices.append({
                 "company": stock["company"],
                 "price": stock["price"],
                 "ltp": stock["ltp"],
