@@ -30,7 +30,7 @@ def get_jobs():
 
 @app.route('/jobs/<title>', methods=["GET"])
 def search_job(title):
-    mongo.db.tenders.create_index([("job_title", pymongo.TEXT)])
+    mongo.db.jobs.create_index([("job_title", pymongo.TEXT)])
     search_query = mongo.db.jobs.find({ "$text": {"$search": title}})
     results = []
     if search_query.count() is not 0:
@@ -112,7 +112,7 @@ def get_stock_prices():
 
 @app.route('/stock/<company>', methods=["GET"])
 def search_company_stock(company):
-    mongo.db.tenders.create_index([("company", pymongo.TEXT)])
+    mongo.db.stock_exchange.create_index([("company", pymongo.TEXT)])
     search_query = mongo.db.stock_exchange.find({ "$text": {"$search": company}})
     results = []
     if search_query.count() is not 0:
