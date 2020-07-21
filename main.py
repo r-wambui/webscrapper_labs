@@ -3,6 +3,7 @@ from flask import Flask
 from flask_pymongo import PyMongo
 
 import json
+import pymongo
 from bson import json_util
 
 app = Flask(__name__)
@@ -29,6 +30,7 @@ def get_jobs():
 
 @app.route('/jobs/<title>', methods=["GET"])
 def search_job(title):
+    mongo.db.tenders.create_index([("job_title", pymongo.TEXT)])
     search_query = mongo.db.jobs.find({ "$text": {"$search": title}})
     results = []
     if search_query.count() is not 0:
@@ -65,6 +67,7 @@ def get_tenders():
 
 @app.route('/tenders/<title>', methods=["GET"])
 def search_tender(title):
+    mongo.db.tenders.create_index([("tender_title", pymongo.TEXT)])
     search_query = mongo.db.tenders.find({ "$text": {"$search": title}})
     results = []
     if search_query.count() is not 0:
@@ -109,6 +112,7 @@ def get_stock_prices():
 
 @app.route('/stock/<company>', methods=["GET"])
 def search_company_stock(company):
+    mongo.db.tenders.create_index([("company", pymongo.TEXT)])
     search_query = mongo.db.stock_exchange.find({ "$text": {"$search": company}})
     results = []
     if search_query.count() is not 0:
