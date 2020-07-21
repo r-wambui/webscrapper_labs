@@ -42,7 +42,6 @@ class MongoPipeline:
         self.client.close()
 
     def process_item(self, item, spider):
-        print("-------------------------------->", spider.name)
         if spider.name == 'tenders':
             if [item for item in self.db[self.collection_name].find( {"tender_code":item['tender_code']} ).limit(1)]:
                 print("data already exist")
@@ -55,7 +54,8 @@ class MongoPipeline:
             self.db[self.collection_name].insert(dict(item))
             logging.debug("Post added to MongoDB")
             return item
+        else:
+            self.db[self.collection_name].insert(dict(item))
+            logging.debug("Post added to MongoDB")
+            return item
 
-
-
-# use created at to get data for only data added after previous run

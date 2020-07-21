@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import os
 # Scrapy settings for analytics project
 #
 # For simplicity, this file contains only settings considered important or
@@ -100,11 +100,10 @@ SPIDER_MIDDLEWARES = {
 # LOG_LEVEL = 'INFO'
 # LOG_STDOUT = True
 #database
-# MONGO_URI = 'mongodb://127.0.0.1/analytics_db'
-MONGO_URI = "mongodb+srv://analytics:nevermind@cluster0.ngveb.mongodb.net/<analytics_db>"
-MONGO_DATABASE = "analytics_db"
-MONGODB_SERVER = "localhost"
-MONGODB_PORT = 27017
+MONGO_URI = os.environ.get("MONGO_URI")
+MONGO_DATABASE = os.environ.get("MONGO_DATABASE")
+MONGODB_SERVER = os.environ.get("MONGODB_SERVER")
+MONGODB_PORT = os.environ.get("MONGODB_PORT")
 
 
 # set

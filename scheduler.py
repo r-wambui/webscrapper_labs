@@ -1,11 +1,13 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 import pymongo
+import os
 import subprocess
+import logging
 
 sched = BlockingScheduler()
 
-MONGO_URI = "mongodb+srv://analytics:nevermind@cluster0.ngveb.mongodb.net/<analytics_db>"
-db = "analytics_db"
+MONGO_URI = os.environ.get("MONGO_URI")
+db = os.environ.get("MONGO_DATABASE")
 
 client = pymongo.MongoClient(MONGO_URI)
 
@@ -16,6 +18,6 @@ def scheduled_job():
     mongo_db = client[db]
     mongo_db["jobs"].remove()
     subprocess.call('./scrape.sh', shell=True)
-    print("Finished daily run")
+    logging.debug("Finished daily run")
     
 sched.start()

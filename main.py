@@ -6,9 +6,9 @@ import json
 from bson import json_util
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb+srv://analytics:nevermind@cluster0.ngveb.mongodb.net/analytics_db?retryWrites=true&w=majority"
+MONGO_URI = os.environ.get("MONGO_URI")
+app.config["MONGO_URI"] = MONGO_URI
 mongo = PyMongo(app)
-print(mongo.db)
 
 @app.route('/jobs', methods=["GET"])
 def get_jobs():
@@ -30,7 +30,6 @@ def get_jobs():
 @app.route('/jobs/<title>', methods=["GET"])
 def search_job(title):
     search_query = mongo.db.jobs.find({ "$text": {"$search": title}})
-    print("----", search_query.count())
     results = []
     if search_query.count() is not 0:
         for job_search in search_query:
@@ -82,6 +81,55 @@ def search_tender(title):
         return json.dumps(results, default=str), 200
     else:
         return {"error": "No such tenders available"}, 404
+
+
+@app.route('/stock', methods=["GET"])
+def get_stock_prices():
+    stock_query = mongo.db.stock_exchange.find()
+    stock_prices = []
+    if stock_query.count() is not 0:
+        for stock in stock_query:
+            stock_query.append({
+                "company": stock["company"],
+                "price": stock["price"],
+                "ltp": stock["ltp"],
+                "prev_price": stock["prev_price"],
+                "today_open": stock["today_open"],
+                "today_high": stock["today_high"],
+                "today_low": stock["today_low"],
+                "turnover": stock["turnover"],
+                "volume": stock["volume"],
+                "change": stock["change"],
+                "today_close": stock["today_close"]
+            })
+        return json.dumps(stock_prices, default=str), 200
+    else:
+        return "No stock prices found", 404
+
+@app.route('/stock/<company>', methods=["GET"])
+def search_company_stock(company):
+    search_query = mongo.db.stock_exchange.find({ "$text": {"$search": company}})
+    results = []
+    if search_query.count() is not 0:
+        for search in search_query:
+            results.append({
+                "company": search["company"],
+                "price": search["price"],
+                "ltp": search["ltp"],
+                "prev_price": search["prev_price"],
+                "today_open": search["today_open"],
+                "today_high": search["today_high"],
+                "today_low": search["today_low"],
+                "turnover": search["turnover"],
+                "volume": search["volume"],
+                "change": search["change"],
+                "today_close": search["today_close"]
+            })
+        return json.dumps(results, default=str), 200
+    else:
+        return {"error": "Stock information of the company is not availabe"}, 404
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get("PORT", 8000))
