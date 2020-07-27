@@ -14,7 +14,7 @@ client = pymongo.MongoClient(MONGO_URI)
 
 
 
-@sched.scheduled_job('cron', day_of_week='mon-fri', hour=10, minute=10)
+@sched.scheduled_job('cron', day_of_week='mon-fri', hour=10, minute=40)
 def scheduled_job():
     mongo_db = client[db]
     mongo_db["jobs"].remove()
