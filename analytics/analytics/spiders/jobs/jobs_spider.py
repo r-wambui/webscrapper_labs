@@ -42,11 +42,11 @@ class BrighterMonday(scrapy.Spider):
             path_v2 = job.xpath(".//a[contains(@href, '/jobs?')]/text()").extract()
             
             if path_v1:
-                item['company']= path_v1[0]
+                item['company']= path_v1[0].strip()
             elif path_v2:   
-                item['company'] = path_v2[0]
+                item['company'] = path_v2[0].strip()
             else:
                 item['company'] = 'Brighter Monday'
-            item['location'] = job.xpath(".//div[@class='search-result__location']/text()").extract()[0]
-            item["time_posted"] = job.xpath("//div[@class='if-wrapper-column align-self--end text--right']/text()").extract()[0]
+            item['location'] = job.xpath(".//div[@class='search-result__location']/text()").extract()[0].strip()
+            item["time_posted"] = job.xpath("//div[@class='if-wrapper-column align-self--end text--right']/text()").extract()[0].strip()
             yield item
