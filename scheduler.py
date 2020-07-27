@@ -1,8 +1,9 @@
-from apscheduler.schedulers.blocking import BlockingScheduler
-import pymongo
-import os
-import subprocess
 import logging
+import os
+import pymongo
+import subprocess
+
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
 
