@@ -27,6 +27,7 @@ class Tenders(scrapy.Item):
 
 class StockExchange(scrapy.Item):
     company = scrapy.Field()
+    datetime_created = scrapy.Field()
     price = scrapy.Field()
     ltp = scrapy.Field()
     prev_price = scrapy.Field()

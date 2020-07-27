@@ -1,7 +1,6 @@
 import scrapy
 import json
 
-
 class NairobiStockExchange(scrapy.Spider):
 
     name = "nse"
@@ -22,7 +21,12 @@ class NairobiStockExchange(scrapy.Spider):
     def get_stock_prices(self, response):
         item = {}
         response_data = json.loads(response.body)['message'][0]['snapshot']['data']
+        date = json.loads(response.body)['message'][1]['updated_at']['date']
+        time = json.loads(response.body)['message'][1]['updated_at']["time"]
+        datetime_created =  date + " " + time
+
         for row in response_data:
+            item["datetime_created"] = datetime_created
             item["company"] = row["issuer"]
             item['price'] = row["price"]
             item["ltp"] = row["ltp"]
