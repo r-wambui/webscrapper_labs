@@ -16,13 +16,15 @@ def get_jobs():
     jobs_query = mongo.db.jobs.find()
     all_jobs = []
     if jobs_query.count() is not 0:
+       
         for job in jobs_query:
             all_jobs.append({
                 "id":job["_id"],
                 "Job_titile":job["job_title"],
                 "Company": job["company"],
                 "Location": job["location"],
-                "Time_posted": job["time_posted"]
+                "Time_posted": job["time_posted"],
+                "Reference": job["reference"]
             })
         return json.dumps(all_jobs, default=str), 200
     else:
@@ -40,7 +42,8 @@ def search_job(title):
                 "Job_titile":job_search["job_title"],
                 "Company": job_search["company"],
                 "Location": job_search["location"],
-                "Time_posted": job_search["time_posted"]
+                "Time_posted": job_search["time_posted"],
+                "Reference": job_search["reference"]
             })
         return json.dumps(results, default=str), 200
     else:

@@ -49,4 +49,9 @@ class BrighterMonday(scrapy.Spider):
                 item['company'] = 'Brighter Monday'
             item['location'] = job.xpath(".//div[@class='search-result__location']/text()").extract()[0].strip()
             item["time_posted"] = job.xpath("//div[@class='if-wrapper-column align-self--end text--right']/text()").extract()[0].strip()
+            ref_path = job.xpath(".//a[@class='search-result__job-title metrics-apply-now ']/@href")
+            if ref_path:
+                item['reference'] = ref_path.get()
+            else:
+                item['reference'] ='Not available'
             yield item
