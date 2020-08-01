@@ -41,5 +41,5 @@ class LinkedinJobs(scrapy.Spider):
                 item['company'] = job.xpath(".//div[@class='result-card__contents job-result-card__contents']/h4/text()").extract()[0]
             item['location'] = job.xpath(".//div[@class='result-card__contents job-result-card__contents']//span/text()").extract()[0]
             item['time_posted'] = job.xpath(".//div[@class='result-card__contents job-result-card__contents']//time/text()").extract()[0]
-            print('----------------->', item)
+            item["reference"] = job.xpath(".//a[@class='result-card__full-card-link']/@href").get()
             yield item

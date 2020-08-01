@@ -13,6 +13,7 @@ class Jobs(scrapy.Item):
     company = scrapy.Field()
     location = scrapy.Field()
     time_posted = scrapy.Field()
+    reference = scrapy.Field()
 
 
 class Tenders(scrapy.Item):
@@ -27,6 +28,7 @@ class Tenders(scrapy.Item):
 
 class StockExchange(scrapy.Item):
     company = scrapy.Field()
+    datetime_created = scrapy.Field()
     price = scrapy.Field()
     ltp = scrapy.Field()
     prev_price = scrapy.Field()
